@@ -86,7 +86,7 @@ document.querySelectorAll('#films video').forEach((video,index)=>{
  const [id,title]=mediaItems[index];
  const target=index===0?video.closest('.film-player'):video.closest('.reel-card');
  target.id='watch-'+id;
- const url=new URL(location.href);url.search='';url.searchParams.set('watch',id);url.hash='watch-'+id;
+ const url=new URL('https://abdulrahmaniq7.github.io/abdulrahmaniq7/');url.search='';url.searchParams.set('watch',id);url.hash='watch-'+id;
  const link=url.href,text=title+' | Abdul Rehaman — gated community platform concept';
  const block=document.createElement('div');block.className='media-share';
  const heading=document.createElement('p');heading.className='share-heading';heading.textContent='Share '+(index===0?'presentation':'reel');block.append(heading);
