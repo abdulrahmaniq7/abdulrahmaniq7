@@ -51,9 +51,10 @@
     const el = e.target.closest('a,button');if (!el) return;
     const href = el.getAttribute('href') || '';
     if (href.startsWith('#')) navigation(href.slice(1));
+    if (el.dataset.uploadAction && ['copy-caption','open-platform','prepare-file','share-file'].includes(el.dataset.uploadAction)) {const modal=el.closest('#social-upload');if(modal)event('social-upload-'+modal.dataset.media+'-'+modal.dataset.platform+'-'+el.dataset.uploadAction);return;}
     if (el.closest('.media-share')) {
       const card = el.closest('.reel-card');const media = card ? card.id.replace('watch-','') : 'presentation';
-      const platform = el.tagName === 'BUTTON' ? (el.textContent.includes('Copy')?'copy-link':'native') : (() => {try {const u = new URL(href);return ({'wa.me':'whatsapp','www.facebook.com':'facebook','www.linkedin.com':'linkedin','twitter.com':'x','t.me':'telegram','www.reddit.com':'reddit'})[u.hostname] || (u.protocol==='mailto:'?'email':'other');} catch {return 'other';}})();
+      const platform = el.dataset.sharePlatform || (el.tagName === 'BUTTON' ? (el.textContent.includes('Copy')?'copy-link':'native') : (() => {try {const u = new URL(href);return ({'wa.me':'whatsapp','www.facebook.com':'facebook','www.linkedin.com':'linkedin','twitter.com':'x','t.me':'telegram','www.reddit.com':'reddit'})[u.hostname] || (u.protocol==='mailto:'?'email':'other');} catch {return 'other';}})());
       event('share-click-' + media + '-' + platform);return;
     }
     if (href.includes('Abdul_Rehaman_A_Resume.pdf')) event('resume-download-click');
